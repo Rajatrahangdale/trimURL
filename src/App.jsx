@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Links from "./pages/Links";
 import RedirectLink from "./pages/RedirectLink";
 import NotFound from "./pages/NotFound";
+import UrlProvider from "./Context";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <UrlProvider>
+      <RouterProvider router={router} />;
+    </UrlProvider>
+  );
 }
 
 export default App;

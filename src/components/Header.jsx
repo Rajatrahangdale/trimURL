@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,18 +10,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut } from "lucide-react";
+import { Link2Icon, LogOut } from "lucide-react";
 const Header = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <nav className="py-4 flex justify-between items-center">
+      <nav className="p-4 flex justify-between items-center container">
         <Link to={"/"}>
           <img src="/logo.png" className="h-16" alt="trimmerLogo" />
         </Link>
         <div>
-          {false ? (
+          {true ? (
             <Button onClick={() => navigate("/auth")}>Login</Button>
           ) : (
             <DropdownMenu>
@@ -35,11 +34,13 @@ const Header = () => {
               <DropdownMenuContent>
                 <DropdownMenuLabel>Rajat Rahangdale</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>My Links</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link2Icon className="mr-2 w-4 h-4" />
+                  My Links
+                </DropdownMenuItem>
                 <DropdownMenuItem className="text-red-400">
-                  <LogOut>
-                    <span>Logout</span>
-                  </LogOut>
+                  <LogOut className="mr-2 w-4 h-4" />
+                  Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
