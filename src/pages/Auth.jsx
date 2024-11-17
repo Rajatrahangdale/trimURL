@@ -6,7 +6,7 @@ import SignUp from "../components/SignUp";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
-  console.log(searchParams);
+  // console.log(searchParams);
   return (
     <div className="mt-36 flex flex-col items-center gap-10">
       <h1 className="text-5xl font-extrabold">

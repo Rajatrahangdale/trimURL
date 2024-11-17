@@ -18,29 +18,27 @@ export async function getCurrentUser() {
   return session.session?.user;
 }
 
-export async function signUp({ name, email, password, profile_pic }) {
-  const filename = `dp-${name.split(" ").join("-")}-${Math.floor(
-    Math.random() * 100
-  )}`;
+export async function signup({ name, email, password, profile_pic }) {
+  const fileName = `dp-${name.split(" ").join("-")}-${Math.random()}`;
+
   const { error: storageError } = await supabase.storage
     .from("profile_pic")
-    .upload(filename, profile_pic);
+    .upload(fileName, profile_pic);
 
-  if (storageError) {
-    throw new Error(storageError.message);
-  }
-  const { data, error } = supabase.auth({
+  if (storageError) throw new Error(storageError.message);
+
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    Options: {
+    options: {
       data: {
         name,
-        profile_pic: `${supabaseUrl}/storage/v1/object/public/profile_pic/${filename}`,
+        profile_pic: `${supabaseUrl}/storage/v1/object/public/profile_pic/${fileName}`,
       },
     },
   });
-  if (error) {
-    throw new Error(error.message);
-  }
+
+  if (error) throw new Error(error.message);
+
   return data;
 }
